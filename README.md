@@ -13,6 +13,7 @@ ser realizada de maneira correta, respeitando a precedência.
 verificada se foi declarada).
 - [x] Atribuições: verificação de tipos.
 - [x] Os comandos de leitura do teclado e de impressão na tela devem ser disponibilizados.
+- [x] Verificar se há variáveis declaradas e não-utilizadas (warning)
 
 ### Anexo 1 - Elementos Adicionais(pelo menos 2 items)
 
