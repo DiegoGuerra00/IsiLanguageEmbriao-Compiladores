@@ -218,6 +218,13 @@ public class IsiLangLexer extends Lexer {
 	        }
 	    }
 
+	    public void checkUnused() {
+	        ArrayList<IsiSymbol> unnused = symbolTable.getAllNotUsed();
+	        for(IsiSymbol symbol: unnused) {
+	            System.out.println("WARNING: Variable " + symbol.getName() + " declared but not used!"); 
+	        }
+	    }
+
 
 	public IsiLangLexer(CharStream input) {
 		super(input);

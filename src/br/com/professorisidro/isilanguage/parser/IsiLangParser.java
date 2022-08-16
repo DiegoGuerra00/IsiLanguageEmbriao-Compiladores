@@ -226,6 +226,13 @@ public class IsiLangParser extends Parser {
 	        }
 	    }
 
+	    public void checkUnused() {
+	        ArrayList<IsiSymbol> unnused = symbolTable.getAllNotUsed();
+	        for(IsiSymbol symbol: unnused) {
+	            System.out.println("WARNING: Variable " + symbol.getName() + " declared but not used!"); 
+	        }
+	    }
+
 	public IsiLangParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
@@ -265,9 +272,10 @@ public class IsiLangParser extends Parser {
 			bloco();
 			setState(37);
 			match(T__1);
-			  program.setVarTable(symbolTable);
-			           	  program.setComandos(stack.pop());
-			           	 
+			  
+			                checkUnused();
+			                program.setVarTable(symbolTable);
+			           	    program.setComandos(stack.pop());
 			           
 			}
 		}
@@ -800,6 +808,7 @@ public class IsiLangParser extends Parser {
 			                 IsiVariable var = (IsiVariable) symbolTable.get(_exprID);
 			                 var.setValue(_exprContent);
 			                 checkAttrType(var);
+			                 symbolTable.get(_exprID).setUsed();
 			               
 			}
 		}

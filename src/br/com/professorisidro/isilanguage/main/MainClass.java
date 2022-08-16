@@ -32,7 +32,7 @@ public class MainClass {
 
 			System.out.println("Compilation Successful");
 
-			parser.exibeComandos();
+			// parser.exibeComandos();
 
 			parser.generateJavaCode();
 

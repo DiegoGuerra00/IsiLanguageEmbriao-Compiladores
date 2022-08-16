@@ -137,12 +137,20 @@ grammar IsiLang;
             throw new IsiSemanticException("Case type must be the same of the switch variable");
         }
     }
+
+    public void checkUnused() {
+        ArrayList<IsiSymbol> unnused = symbolTable.getAllNotUsed();
+        for(IsiSymbol symbol: unnused) {
+            System.out.println("WARNING: Variable " + symbol.getName() + " declared but not used!"); 
+        }
+    }
 }
 
 prog	: 'programa' decl bloco  'fimprog;'
-           {  program.setVarTable(symbolTable);
-           	  program.setComandos(stack.pop());
-           	 
+           {  
+                checkUnused();
+                program.setVarTable(symbolTable);
+           	    program.setComandos(stack.pop());
            } 
 		;
 		
@@ -236,6 +244,7 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                  IsiVariable var = (IsiVariable) symbolTable.get(_exprID);
                  var.setValue(_exprContent);
                  checkAttrType(var);
+                 symbolTable.get(_exprID).setUsed();
                }
 			;
 			
