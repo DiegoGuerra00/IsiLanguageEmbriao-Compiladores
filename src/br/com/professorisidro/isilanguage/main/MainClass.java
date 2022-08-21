@@ -15,6 +15,8 @@ import br.com.professorisidro.isilanguage.parser.IsiLangParser;
  */
 public class MainClass {
 	public static void main(String[] args) {
+		final String ANSI_RED = "\u001B[31m	";
+		final String ANSI_RESET = "\u001B[0m";
 		try {
 			IsiLangLexer lexer;
 			IsiLangParser parser;
@@ -39,10 +41,10 @@ public class MainClass {
 			parser.generateDartCode();
 
 		} catch (IsiSemanticException ex) {
-			System.err.println("Semantic error - " + ex.getMessage());
+			System.err.println(ANSI_RED + "Semantic error - " + ANSI_RESET + ex.getMessage());
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.err.println("ERROR " + ex.getMessage());
+			System.err.println(ANSI_RED + "ERROR " + ANSI_RESET + ex.getMessage());
 		}
 
 	}

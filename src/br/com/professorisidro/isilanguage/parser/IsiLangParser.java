@@ -122,10 +122,13 @@ public class IsiLangParser extends Parser {
 		private ArrayList<AbstractCommand> listaFalse;
 	    private ArrayList<AbstractCommand> listaEnquanto;
 	    private ArrayList<AbstractCommand> listaCase;
+	    private static final String ANSI_YELLOW = "\u001B[33m";
+	    private static final String ANSI_RED = "\u001B[31m	";
+	    private static final String ANSI_RESET = "\u001B[0m";
 		
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
-				throw new IsiSemanticException("Symbol "+id+" not declared");
+				throw new IsiSemanticException(ANSI_RED + "Symbol "+id+" not declared" + ANSI_RESET);
 			}
 		}
 		
@@ -229,7 +232,7 @@ public class IsiLangParser extends Parser {
 	    public void checkUnused() {
 	        ArrayList<IsiSymbol> unnused = symbolTable.getAllNotUsed();
 	        for(IsiSymbol symbol: unnused) {
-	            System.out.println("WARNING: Variable " + symbol.getName() + " declared but not used!"); 
+	            System.out.println(ANSI_YELLOW + "WARNING: Variable " + symbol.getName() + " declared but not used!" + ANSI_RESET); 
 	        }
 	    }
 

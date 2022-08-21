@@ -3,6 +3,7 @@ programa
   int a, b;
   texto t;
 
+  t = 1;
   a = 1;
   b = 1;
   
