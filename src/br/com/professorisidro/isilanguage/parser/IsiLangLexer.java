@@ -120,7 +120,7 @@ public class IsiLangLexer extends Lexer {
 		
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
-				throw new IsiSemanticException(ANSI_RED + "Symbol "+id+" not declared" + ANSI_RESET);
+				throw new IsiSemanticException("Symbol "+id+" not declared");
 			}
 		}
 		
@@ -138,61 +138,24 @@ public class IsiLangLexer extends Lexer {
 	        program.generateDartTarget();
 	    }
 
-	    public void checkAttrType(IsiVariable var) {
-	        boolean isInt = false;
-	        boolean isDouble = false;
-	        boolean isString = var.getValue().matches(".*[a-zA-Z].");
-	        Number number = null;
-
-	        // Caso não seja uma String(i.e. apenas letras) assume-se que é um número e testa seu tipo
-	        if(!isString) {
-	            try {
-	                if(var.getValue().indexOf(".") >= 0) {
-	                        number = Double.parseDouble(var.getValue());
-	                        isDouble = true;
-	                } 
-	                else {
-	                        number = Integer.parseInt(var.getValue());
-	                        isInt = true;
-	                }
-	            }
-	            catch(NumberFormatException ex) {
-	                throw new IsiSemanticException("Invalid type on variable " + var.getName());
-	            }
-	        } 
+	    // Checa a compatibilidade do tipo das variáveis
+	    public void checkTypeComp(String id, int targetType, String expr) {
+	        IsiVariable var = (IsiVariable) symbolTable.get(id);
 
 	        // Pega o tipo esperado pela variável
-	        String targetType = "";
+	        String type = "";
 	        if(var.getType() == 0) {
-	               targetType = "int";
+	               type = "int";
 	        }
 	        else if(var.getType() == 1) {
-	                targetType = "double";
+	                type = "double";
 	        }
 	        else {
-	                targetType = "String";
+	                type = "String";
 	        }
 
-	        // Pega qual tipo recebido pela variável
-	        String gotType = "";
-	        if(isString) {
-	                gotType = "String";
-	        }
-	        else if(isInt) {
-	                gotType = "int";
-	        }
-	        else if(isDouble) {
-	                gotType = "double";
-	        }
-
-	        if(isInt && var.getType() != IsiVariable.INT) {
-	            throw new IsiSemanticException("Type mismatch on variable " + var.getName() + ". Expected " + targetType + " but got " + gotType);
-	        }
-	        if(isDouble && var.getType() != IsiVariable.DOUBLE) {
-	            throw new IsiSemanticException("Type mismatch on variable " + var.getName() + ". Expected " + targetType + " but got " + gotType);
-	        }
-	        if(isString && var.getType() != IsiVariable.TEXT) {
-	            throw new IsiSemanticException("Type mismatch on variable " + var.getName() + ". Expected " + targetType + " but got " + gotType);
+	        if(var.getType() != targetType) {
+	            throw new IsiSemanticException("Type mismatch for variable " + id + ". Expected " + type + ".");
 	        }
 	    }
 

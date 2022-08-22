@@ -23,6 +23,7 @@ public class MainClass {
 
 			// leio o arquivo "input.isi" e isso é entrada para o Analisador Lexico
 			lexer = new IsiLangLexer(CharStreams.fromFileName("input.isi"));
+			// lexer = new IsiLangLexer(CharStreams.fromFileName("types.isi"));
 
 			// crio um "fluxo de tokens" para passar para o PARSER
 			CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -44,7 +45,7 @@ public class MainClass {
 			System.err.println(ANSI_RED + "Semantic error - " + ANSI_RESET + ex.getMessage());
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.err.println(ANSI_RED + "ERROR " + ANSI_RESET + ex.getMessage());
+			System.err.println(ANSI_RED + "ERROR " + ex.getMessage() + ANSI_RESET);
 		}
 
 	}

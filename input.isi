@@ -1,29 +1,61 @@
 programa
 
   int a, b;
-  texto t;
+  double numero;
+  texto t, teste;
 
-  t = 1;
-  a = 1;
-  b = 1;
-  
   leia(a);
-  se(a < b) {
-    a = 0;
+  leia(b);
+  leia(numero);
+
+  b = 90;
+  escreva("Teste de escrita");
+  escreva(0);
+
+  se(a == 0) {
+    b = 1;
   }
   senao {
-    b = 0;
+    b = 100;
   }
 
-  escolha(a) {
-    caso 1:
-      b = 0;
+  se(numero == 0) {
+    b = 1;
+  }
+  senao {
+    b = 100;
+  }
+
+  enquanto( b < 0) {
+    escreva(a);
+    b = a - 5;
+  }
+
+
+  t = "string";
+
+  escolha(t) {
+    caso "hello":
+      escreva("world");
       break;
-    caso 2:
-      a = 0;
+    caso "error":
+      leia(t);
       break;
     padrao:
-      a = 1;
+      escreva(t);
       break;
   }
+
+  a = 1;
+  b = 1;
+  numero = 2.543;
+  t = "123";
+
+  leia(a);
+  leia(b);
+
+  escreva(b);
+
+  a = b * 2;
+  
 fimprog;

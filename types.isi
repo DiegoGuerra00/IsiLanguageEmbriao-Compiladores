@@ -1,0 +1,8 @@
+programa
+    int a, b;
+    double c;
+    texto s;
+
+    a = 2.5;
+
+fimprog;

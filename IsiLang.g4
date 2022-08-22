@@ -58,61 +58,24 @@ grammar IsiLang;
         program.generateDartTarget();
     }
 
-    public void checkAttrType(IsiVariable var) {
-        boolean isInt = false;
-        boolean isDouble = false;
-        boolean isString = var.getValue().matches(".*[a-zA-Z].");
-        Number number = null;
-
-        // Caso não seja uma String(i.e. apenas letras) assume-se que é um número e testa seu tipo
-        if(!isString) {
-            try {
-                if(var.getValue().indexOf(".") >= 0) {
-                        number = Double.parseDouble(var.getValue());
-                        isDouble = true;
-                } 
-                else {
-                        number = Integer.parseInt(var.getValue());
-                        isInt = true;
-                }
-            }
-            catch(NumberFormatException ex) {
-                throw new IsiSemanticException("Invalid type on variable " + var.getName());
-            }
-        } 
+    // Checa a compatibilidade do tipo das variáveis
+    public void checkTypeComp(String id, int targetType, String expr) {
+        IsiVariable var = (IsiVariable) symbolTable.get(id);
 
         // Pega o tipo esperado pela variável
-        String targetType = "";
+        String type = "";
         if(var.getType() == 0) {
-               targetType = "int";
+               type = "int";
         }
         else if(var.getType() == 1) {
-                targetType = "double";
+                type = "double";
         }
         else {
-                targetType = "String";
+                type = "String";
         }
 
-        // Pega qual tipo recebido pela variável
-        String gotType = "";
-        if(isString) {
-                gotType = "String";
-        }
-        else if(isInt) {
-                gotType = "int";
-        }
-        else if(isDouble) {
-                gotType = "double";
-        }
-
-        if(isInt && var.getType() != IsiVariable.INT) {
-            throw new IsiSemanticException("Type mismatch on variable " + var.getName() + ". Expected " + targetType + " but got " + gotType);
-        }
-        if(isDouble && var.getType() != IsiVariable.DOUBLE) {
-            throw new IsiSemanticException("Type mismatch on variable " + var.getName() + ". Expected " + targetType + " but got " + gotType);
-        }
-        if(isString && var.getType() != IsiVariable.TEXT) {
-            throw new IsiSemanticException("Type mismatch on variable " + var.getName() + ". Expected " + targetType + " but got " + gotType);
+        if(var.getType() != targetType) {
+            throw new IsiSemanticException("Type mismatch for variable " + id + ". Expected " + type + ".");
         }
     }
 
@@ -224,9 +187,13 @@ cmdleitura	: 'leia' AP
 			
 cmdescrita	: 'escreva' 
                  AP 
-                 ID { verificaID(_input.LT(-1).getText());
+                 (ID { verificaID(_input.LT(-1).getText());
 	                  _writeID = _input.LT(-1).getText();
-                    }
+                     }
+                  | INT {_writeID = _input.LT(-1).getText();}
+                  | DOUBLE {_writeID = _input.LT(-1).getText();}
+                  | STRING {_writeID = _input.LT(-1).getText();}
+                 )
                  FP 
                  SC
                {
@@ -246,14 +213,13 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                	 stack.peek().add(cmd);
                  IsiVariable var = (IsiVariable) symbolTable.get(_exprID);
                  var.setValue(_exprContent);
-                 checkAttrType(var);
                  symbolTable.get(_exprID).setUsed();
                }
 			;
 			
 			
 cmdselecao  :  'se' AP
-                    (ID | expr) { _exprDecision = _input.LT(-1).getText(); }
+                    (ID) { _exprDecision = _input.LT(-1).getText(); }
                     OPREL { _exprDecision += _input.LT(-1).getText(); }
                     (ID | expr) {_exprDecision += _input.LT(-1).getText(); }
                     FP 
@@ -366,17 +332,22 @@ termo_ : (
 
 fator : INT {
                 _exprContent += _input.LT(-1).getText();
+                checkTypeComp(_exprID, IsiVariable.INT, _exprContent);
             }
         |
         DOUBLE {
                 _exprContent += _input.LT(-1).getText();
+                checkTypeComp(_exprID, IsiVariable.DOUBLE, _exprContent);
             }
         | STRING {
                     _exprContent += _input.LT(-1).getText();
+                    checkTypeComp(_exprID, IsiVariable.TEXT, _exprContent);
                  } 
         | ID {
                 verificaID(_input.LT(-1).getText());
                 _exprContent += _input.LT(-1).getText();
+                IsiVariable var = (IsiVariable) symbolTable.get(_exprID);
+                checkTypeComp(_exprID, var.getType(), _exprContent);
             }
         | AP {_exprContent += _input.LT(-1).getText();}
           expr

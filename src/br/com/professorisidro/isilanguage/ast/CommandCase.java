@@ -49,7 +49,7 @@ public class CommandCase extends AbstractCommand {
             ArrayList<AbstractCommand> commands = entry.getValue();
             str.append("case " + caseItem + ": {\n");
             for (AbstractCommand cmd : commands) {
-                str.append(cmd.generateJavaCode());
+                str.append(cmd.generateDartCode());
             }
             str.append("break;");
             str.append("\n}");
@@ -57,7 +57,7 @@ public class CommandCase extends AbstractCommand {
         if (!defaultsCommands.isEmpty()) {
             str.append("default:\n");
             for (AbstractCommand cmd : defaultsCommands) {
-                str.append(cmd.generateJavaCode() + "\n");
+                str.append(cmd.generateDartCode() + "\n");
             }
             str.append("break;");
         }

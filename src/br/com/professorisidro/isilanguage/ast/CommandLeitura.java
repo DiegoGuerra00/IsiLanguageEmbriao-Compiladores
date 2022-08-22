@@ -24,12 +24,12 @@ public class CommandLeitura extends AbstractCommand {
 
 	@Override
 	public String generateJavaCode() {
-		return id + "= _key." + getType(var);
+		return id + " = _key." + getType(var);
 	}
 
 	@Override
 	public String generateDartCode() {
-		return id = "stdin.readLineSync(encoding: utf8);";
+		return id + " = stdin.readLineSync(encoding: utf8);";
 	}
 
 	@Override

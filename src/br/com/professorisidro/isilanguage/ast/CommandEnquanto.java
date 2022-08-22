@@ -33,7 +33,7 @@ public class CommandEnquanto extends AbstractCommand {
         StringBuilder str = new StringBuilder();
         str.append("while (" + condition + ") {\n");
         for (AbstractCommand cmd : commands) {
-            str.append(cmd.generateJavaCode());
+            str.append(cmd.generateDartCode());
         }
         str.append("\n}\n");
 

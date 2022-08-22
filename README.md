@@ -1,19 +1,25 @@
 # IsiLanguageEmbriao - Projeto de Compiladores
 
+## Integrantes
+
+- Diego Guerra / RA: 11201810534
+
+## Vídeo
+
+O vídeo está disponível neste [link]() 
+
 ## Checklist
 
 ### Items obrigatórios
-
-- [x] Deve ter 2 tipos de variáveis (um deles, obrigatóriamente TEXTO).
-- [x] Deve ter a estrutura de controle de decisão (if/else - se/senão).
-- [x] Deve ter a estrutura de repetição (while ou enquanto).
-- [x] A parte de expressões envolvendo os operadores matemáticos deve 
-ser realizada de maneira correta, respeitando a precedência.
-- [x] Verificação de variáveis não declaradas (cada variável utilizada deve ser
-verificada se foi declarada).
-- [x] Atribuições: verificação de tipos.
-- [x] Os comandos de leitura do teclado e de impressão na tela devem ser disponibilizados.
-- [x] Verificar se há variáveis declaradas e não-utilizadas (warning)
+- [x] Possuir 2 tipos de dados (pelo menos 1 String)  	
+- [x] Possuir a instrução de decisão (if/else) 	
+- [x] Pelo menos 1 estrutura de repetição 	
+- [x] Verificar Atribuições com compatibilidade de tipos (semântica)  	
+- [x] Possuir operações de Entrada e Saída 	
+- [x] Aceitar números decimais  	
+- [x] Verificar declaração de variávies (não usar variáveis que não foram declaradas) 	
+- [x] Verificar se há variáveis declaradas e não-utilizadas (warning) 	
+- [x] Geração de pelo menos 1 linguagem destino (C/Java/Python)
 
 ### Anexo 1 - Elementos Adicionais(pelo menos 2 items)
 

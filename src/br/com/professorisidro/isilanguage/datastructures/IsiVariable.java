@@ -50,15 +50,7 @@ public class IsiVariable extends IsiSymbol {
 
 	@Override
 	public String generateDartCode() {
-		String str;
-		if (type == DOUBLE) {
-			str = "double ";
-		} else if (type == INT) {
-			str = "int";
-		} else {
-			str = "String ";
-		}
-		return str + " " + super.name + ";";
+		return  "var " + super.name + ";";
 	}
 
 }
