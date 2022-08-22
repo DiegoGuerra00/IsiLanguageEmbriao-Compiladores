@@ -3,6 +3,7 @@
 ## Integrantes
 
 - Diego Guerra / RA: 11201810534
+- Luiz Aparecido Joana / RA: 21084914
 
 ## Vídeo
 
