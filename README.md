@@ -7,7 +7,7 @@
 
 ## Vídeo
 
-O vídeo está disponível neste [link]() 
+O vídeo está disponível neste [link](https://youtu.be/gemsCCCSzC4) 
 
 ## Checklist
 
@@ -35,3 +35,32 @@ O vídeo está disponível neste [link]()
 - [ ] Criar um editor com Highlights de palavras reservadas (editor Desktop)
 - [ ] Criar um editor Web para o código
 - [ ] Tornar o compilador um Webservice para receber programas e enviar respostas de possíveis erros
+
+## Exemplo de Entrada
+
+Um exemplo simples de uma entrada pode ser visto no arquivo `types.isi`  
+
+```
+programa
+    int a, b;
+    double c;
+    texto s;
+
+    a = 1;
+    s = "hello world";
+fimprog;
+```
+
+## Exemplos de Erros/Warnigs
+
+#### Variável Não Utilizada
+
+![](images/not_used.png) 
+
+#### Incompatibilidade de tipos
+
+![](images/type.png) 
+
+#### Variável Não Declarada
+
+![](images/not_declared.png) 

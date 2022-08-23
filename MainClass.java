@@ -5,6 +5,7 @@ public class MainClass{
 int a;
 String  teste;
 int b;
+int c;
 double  numero;
 String  t;
 a = _key.nextInt();

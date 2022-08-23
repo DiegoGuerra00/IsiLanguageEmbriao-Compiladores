@@ -59,7 +59,7 @@ grammar IsiLang;
     }
 
     // Checa a compatibilidade do tipo das variáveis
-    public void checkTypeComp(String id, int targetType, String expr) {
+    public void checkTypeComp(String id, int targetType) {
         IsiVariable var = (IsiVariable) symbolTable.get(id);
 
         // Pega o tipo esperado pela variável
@@ -332,22 +332,22 @@ termo_ : (
 
 fator : INT {
                 _exprContent += _input.LT(-1).getText();
-                checkTypeComp(_exprID, IsiVariable.INT, _exprContent);
+                checkTypeComp(_exprID, IsiVariable.INT);
             }
         |
         DOUBLE {
                 _exprContent += _input.LT(-1).getText();
-                checkTypeComp(_exprID, IsiVariable.DOUBLE, _exprContent);
+                checkTypeComp(_exprID, IsiVariable.DOUBLE);
             }
         | STRING {
                     _exprContent += _input.LT(-1).getText();
-                    checkTypeComp(_exprID, IsiVariable.TEXT, _exprContent);
+                    checkTypeComp(_exprID, IsiVariable.TEXT);
                  } 
         | ID {
                 verificaID(_input.LT(-1).getText());
                 _exprContent += _input.LT(-1).getText();
                 IsiVariable var = (IsiVariable) symbolTable.get(_exprID);
-                checkTypeComp(_exprID, var.getType(), _exprContent);
+                checkTypeComp(_exprID, var.getType());
             }
         | AP {_exprContent += _input.LT(-1).getText();}
           expr

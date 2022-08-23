@@ -4,6 +4,7 @@ void main() {
 var a;
 var teste;
 var b;
+var c;
 var numero;
 var t;
 a = stdin.readLineSync(encoding: utf8);

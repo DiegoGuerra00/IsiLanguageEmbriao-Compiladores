@@ -1,6 +1,6 @@
 programa
 
-  int a, b;
+  int a, b, c;
   double numero;
   texto t, teste;
 
